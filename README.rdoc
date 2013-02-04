@@ -1,0 +1,99 @@
+= ActiveRecord JDBC NuoDB Adapter 
+
+{<img src="https://api.travis-ci.org/nuodb/activerecord-jdbcnuodb-adapter.png?branch=master" alt="Build Status" />}[http://travis-ci.org/nuodb/activerecord-jdbcnuodb-adapter]
+{<img src="https://gemnasium.com/nuodb/activerecord-jdbcnuodb-adapter.png?travis" alt="Dependency Status" />}[https://gemnasium.com/nuodb/activerecord-jdbcnuodb-adapter]
+{<img src="https://codeclimate.com/github/nuodb/activerecord-jdbcnuodb-adapter.png" />}[https://codeclimate.com/github/nuodb/activerecord-jdbcnuodb-adapter]
+
+== DESCRIPTION
+
+An ActiveRecord JDBC Adapter for NuoDB.
+
+== Usage
+
+1. Include NuoDB information in the database.yml file as:
+
+    development:
+        adapter: nuodb
+        database: test
+        username: cloud
+        password: user
+
+2. In the Gemfile, call the nuodb gem with:
+
+    gem 'activerecord-jdbcnuodb-adapter'
+
+== BUILDING THE GEM
+
+To compile and test run this command:
+
+    rake clean build rdoc spec
+
+== INSTALLING THE GEM
+
+    gem install activerecord-jdbcnuodb-adapter-1.0.0.gem
+
+Or from the source tree:
+
+    gem install pkg/activerecord-jdbcnuodb-adapter-1.0.0.gem
+
+== TESTING THE GEM
+
+Start up a minimal chorus as follows:
+
+    java -jar ${NUODB_ROOT}/jar/nuoagent.jar --broker &
+    ${NUODB_ROOT}/bin/nuodb --chorus test --password bar --dba-user dba --dba-password baz --verbose debug --archive /var/tmp/nuodb --initialize --force &
+    ${NUODB_ROOT}/bin/nuodb --chorus test --password bar --dba-user dba --dba-password baz &
+
+Create a user in the database:
+
+    ${NUODB_ROOT}/bin/nuosql test@localhost --user dba --password baz
+    > create user cloud password 'user';
+    > exit
+
+Run the tests:
+
+    rake spec
+
+== TRYING THE SAMPLE
+
+1. Install the NuoDB gems:
+
+    gem install jdbc-nuodb-1.0.0.gem
+    gem install activerecord-jdbcnuodb-adapter-1.0.0.gem
+
+2. Verify the gems are installed:
+
+    gem list
+
+3. Run the sample:
+
+    jruby samples/sample.rb
+
+== PUBLISHING THE GEM
+
+=== TAGGING
+
+Tag the product using tags per the SemVer specification; our tags have a v-prefix:
+
+    git tag -a v1.0.0 -m "SemVer Version: v1.0.0"
+
+If you make a mistake, take it back quickly:
+
+    git tag -d v1.0.0
+    git push origin :refs/tags/v1.0.0
+
+===PUBLISHING
+
+Here are the commands used to publish:
+
+    gem push pkg/activerecord-jdbcnuodb-adapter-1.0.0.gem
+
+== INSPECTING THE GEM
+
+It is often useful to inspect the contents of a Gem before distribution.
+To do this you dump the contents of a gem thus:
+
+    gem unpack pkg/activerecord-jdbcnuodb-adapter-1.0.0.gem
+
+== REFERENCES
+

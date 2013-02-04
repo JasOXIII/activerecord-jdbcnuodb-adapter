@@ -28,14 +28,6 @@ begin
   end
 
   namespace :spec do
-    desc "Run all specs in spec directory with RCov"
-    RSpec::Core::RakeTask.new(:cov) do |t|
-      require 'simplecov'
-      SimpleCov.start do
-        add_group 'Libraries', 'lib'
-      end
-    end
-
     desc "Print Specdoc for all specs"
     RSpec::Core::RakeTask.new(:doc) do |t|
       t.rspec_opts = %w(--format specdoc --dry-run)
