@@ -22,6 +22,23 @@ An ActiveRecord JDBC Adapter for NuoDB.
 
     gem 'activerecord-jdbcnuodb-adapter'
 
+== ENVIRONMENT SETUP
+
+=== MAC
+
+To set up JRuby on Mac, you may optimally install RVM and use that to install
+JRuby, or you may also install it from the package installer available online
+which requires additional environment setup.
+
+For Mac, run the package installer available at:
+
+  http://jruby.org.s3.amazonaws.com/downloads/1.7.2/JRuby-1.7.2.dmg
+
+Then update your path so that the Gem from JRuby is first on your path ahead
+of the system installed ruby:
+
+  export PATH=/Library/Frameworks/JRuby.framework/Versions/Current/bin:$PATH
+
 == BUILDING THE GEM
 
 To compile and test run this command:
@@ -58,6 +75,7 @@ Run the tests:
 
 1. Install the NuoDB gems:
 
+    gem install rails
     gem install jdbc-nuodb-1.0.0.gem
     gem install activerecord-jdbcnuodb-adapter-1.0.0.gem
 
@@ -67,6 +85,7 @@ Run the tests:
 
 3. Run the sample:
 
+    export CLASSPATH=/path/to/nuodb/jar/nuodbjdbc.jar
     jruby samples/sample.rb
 
 == PUBLISHING THE GEM
