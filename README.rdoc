@@ -20,7 +20,7 @@ An ActiveRecord JDBC Adapter for NuoDB.
 
 2. In the Gemfile, call the nuodb gem with:
 
-    gem 'activerecord-jdbcnuodb-adapter'
+    jruby -S gem 'activerecord-jdbcnuodb-adapter'
 
 == ENVIRONMENT SETUP
 
@@ -43,15 +43,15 @@ of the system installed ruby:
 
 To compile and test run this command:
 
-    rake clean build rdoc spec
+    jruby -S rake clean build rdoc spec
 
 == INSTALLING THE GEM
 
-    gem install activerecord-jdbcnuodb-adapter-1.0.0.gem
+    jruby -S gem install activerecord-jdbcnuodb-adapter-1.0.0.gem
 
 Or from the source tree:
 
-    gem install pkg/activerecord-jdbcnuodb-adapter-1.0.0.gem
+    jruby -S gem install pkg/activerecord-jdbcnuodb-adapter-1.0.0.gem
 
 == TESTING THE GEM
 
@@ -69,19 +69,19 @@ Create a user in the database:
 
 Run the tests:
 
-    rake spec
+    jruby -S rake spec
 
 == TRYING THE SAMPLE
 
 1. Install the NuoDB gems:
 
-    gem install rails
-    gem install jdbc-nuodb-1.0.0.gem
-    gem install activerecord-jdbcnuodb-adapter-1.0.0.gem
+    jruby -S gem install rails
+    jruby -S gem install jdbc-nuodb-1.0.0.gem
+    jruby -S gem install activerecord-jdbcnuodb-adapter-1.0.0.gem
 
 2. Verify the gems are installed:
 
-    gem list
+    jruby -S gem list
 
 3. Run the sample:
 
