@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'rake'
 
-GEM_ROOT ||= File.expand_path(File.join(File.dirname(__FILE__), ".."))
+GEM_ROOT ||= File.expand_path(File.join(File.dirname(__FILE__), '..'))
 
 begin
 
@@ -9,26 +9,26 @@ begin
 
   task :default => :spec
 
-  desc "Run all specs in spec directory"
+  desc 'Run all specs in spec directory'
   RSpec::Core::RakeTask.new(:spec) do |t|
     t.rspec_opts = ['--options', "\"#{GEM_ROOT}/.rspec\""]
     t.pattern = FileList['spec/**/*_spec.rb']
   end
 
-  desc "Run all rspec functional tests (in functional/ directory)"
+  desc 'Run all rspec functional tests (in functional/ directory)'
   RSpec::Core::RakeTask.new(:functional) do |t|
     t.rspec_opts = ['--options', "\"#{GEM_ROOT}/spec/spec.opts\""]
     t.pattern = FileList['spec/functional/**/*_spec.rb']
   end
 
-  desc "Run all rspec unit tests (in unit/ directory)"
+  desc 'Run all rspec unit tests (in unit/ directory)'
   RSpec::Core::RakeTask.new(:spec_unit) do |t|
     t.rspec_opts = ['--options', "\"#{GEM_ROOT}/.rspec\""]
     t.pattern = FileList['spec/unit/**/*_spec.rb']
   end
 
   namespace :spec do
-    desc "Print Specdoc for all specs"
+    desc 'Print Specdoc for all specs'
     RSpec::Core::RakeTask.new(:doc) do |t|
       t.rspec_opts = %w(--format specdoc --dry-run)
       t.pattern = FileList['spec/**/*_spec.rb']

@@ -22,10 +22,10 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'activerecord-jdbc-adapter', '>= 1.0.0'
 
   %w(rake).each { |gem| spec.add_development_dependency gem }
-  %w(rspec rspec-core rspec-expectations rspec-mocks).each { |gem| spec.add_development_dependency gem, "~> 2.11.0" }
+  %w(rspec rspec-core rspec-expectations rspec-mocks).each { |gem| spec.add_development_dependency gem, '~> 2.11.0' }
 
   spec.rubygems_version = %q{1.3.7}
-  spec.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if spec.respond_to? :required_rubygems_version=
+  spec.required_rubygems_version = Gem::Requirement.new('> 1.3.1') if spec.respond_to? :required_rubygems_version=
   if spec.respond_to? :specification_version
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     spec.specification_version = 3

@@ -35,8 +35,8 @@ require 'date'
 require 'bundler'
 require 'bundler/gem_tasks'
 
-require File.expand_path(File.dirname(__FILE__)) + "/spec/support/config"
-require File.expand_path(File.dirname(__FILE__)) + "/tasks/rspec"
+require File.expand_path(File.dirname(__FILE__)) + '/spec/support/config'
+require File.expand_path(File.dirname(__FILE__)) + '/tasks/rspec'
 
 Bundler::GemHelper.install_tasks
 
@@ -141,7 +141,7 @@ task :default => :spec
 
 desc "Build #{gem_file} into the pkg directory"
 task :build do
-  sh "mkdir -p pkg"
+  sh 'mkdir -p pkg'
   sh "gem build #{gemspec_file}"
   sh "mv #{gem_file} pkg"
 end
@@ -154,12 +154,12 @@ task :uninstall do
   sh %{gem uninstall #{name} -x -v #{version}}
 end
 
-desc "Tags git with the latest gem version"
+desc 'Tags git with the latest gem version'
 task :tag do
   sh %{git tag v#{version}}
 end
 
-desc "Push gem packages"
+desc 'Push gem packages'
 task :push => :build do
   sh "gem push pkg/#{name}*.gem"
 end

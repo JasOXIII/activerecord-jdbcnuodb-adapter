@@ -1,8 +1,8 @@
-desc "Prints lines of code metrics"
+desc 'Prints lines of code metrics'
 task :stats do
   lines, codelines, total_lines, total_codelines = 0, 0, 0, 0
 
-  FileList["lib/nuodb/**/*.rb", "ext/nuodb/*.cpp"].each { |file_name|
+  FileList['lib/nuodb/**/*.rb', 'ext/nuodb/*.cpp'].each { |file_name|
     next if file_name =~ /vendor/
     f = File.open(file_name)
 
@@ -12,7 +12,7 @@ task :stats do
       next if line =~ /^\s*#/
       codelines += 1
     end
-    puts "L: #{sprintf("%4d", lines)}, LOC #{sprintf("%4d", codelines)} | #{file_name}"
+    puts "L: #{sprintf('%4d', lines)}, LOC #{sprintf('%4d', codelines)} | #{file_name}"
 
     total_lines += lines
     total_codelines += codelines

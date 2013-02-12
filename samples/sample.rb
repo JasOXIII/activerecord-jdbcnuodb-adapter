@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'active_record'
 
-puts "Connecting to database..."
+puts 'Connecting to database...'
 
 ActiveRecord::Base.establish_connection(
     :adapter => 'nuodb',
@@ -10,13 +10,13 @@ ActiveRecord::Base.establish_connection(
     :password => 'user'
 )
 
-puts "Create tables..."
+puts 'Create tables...'
 
 class User < ActiveRecord::Base
   has_one :addr, :class_name => 'Addr'
 
   def to_s
-    "User(#{id}), Username: #{user_name}, Name: #{first_name} #{last_name}, #{admin ? "admin" : "member"}\n" +
+    "User(#{id}), Username: #{user_name}, Name: #{first_name} #{last_name}, #{admin ? 'admin' : 'member'}\n" +
         "  Address: #{addr}\n"
   end
 end
@@ -48,48 +48,48 @@ ActiveRecord::Schema.define do
   end
 end
 
-puts "Create user records..."
+puts 'Create user records...'
 
 user = User.create do |user_instance|
-  user_instance.first_name = "Fred"
-  user_instance.last_name = "Flintstone"
-  user_instance.email = "fredf@example.com"
-  user_instance.user_name = "fred"
+  user_instance.first_name = 'Fred'
+  user_instance.last_name = 'Flintstone'
+  user_instance.email = 'fredf@example.com'
+  user_instance.user_name = 'fred'
   user_instance.admin = true
 end
 
 user.create_addr do |address|
-  address.street = "301 Cobblestone Way"
-  address.city = "Bedrock"
-  address.zip = "00001"
+  address.street = '301 Cobblestone Way'
+  address.city = 'Bedrock'
+  address.zip = '00001'
 end
 
 puts "Created #{user}"
 
 user = User.create do |user_instance|
-  user_instance.first_name = "Barney"
-  user_instance.last_name = "Rubble"
-  user_instance.email = "barney@example.com"
-  user_instance.user_name = "barney"
+  user_instance.first_name = 'Barney'
+  user_instance.last_name = 'Rubble'
+  user_instance.email = 'barney@example.com'
+  user_instance.user_name = 'barney'
   user_instance.admin = false
 end
 
 user.create_addr do |address|
-  address.street = "303 Cobblestone Way"
-  address.city = "Bedrock"
-  address.zip = "00001"
+  address.street = '303 Cobblestone Way'
+  address.city = 'Bedrock'
+  address.zip = '00001'
 end
 
 puts "Created #{user}"
 
-puts "Print user records..."
+puts 'Print user records...'
 
 puts "Found #{User.count} records:"
 User.find do |entry|
   puts entry
 end
 
-puts "Modify user records..."
+puts 'Modify user records...'
 
 User.all.each do |entry|
   entry.first_name = entry.first_name.upcase
@@ -100,7 +100,7 @@ User.all.each do |entry|
   entry.save
 end
 
-puts "Print user records..."
+puts 'Print user records...'
 
 puts "Found #{User.count} records:"
 User.find_each do |entry|

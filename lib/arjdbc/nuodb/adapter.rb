@@ -67,7 +67,7 @@ module ::ArJdbc
       if (table.include? '.') || @config[:schema].blank?
         table
       else
-        nuodb_schema + "." + table
+        nuodb_schema + '.' + table
       end
     end
 
