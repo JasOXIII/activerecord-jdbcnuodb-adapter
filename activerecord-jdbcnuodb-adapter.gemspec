@@ -1,8 +1,12 @@
 # -*- encoding: utf-8 -*-
 
+lib = File.expand_path('../lib', __FILE__)
+$:.push lib unless $:.include?(lib)
+require 'activerecord-jdbcnuodb-adapter'
+
 Gem::Specification.new do |spec|
   spec.name             = 'activerecord-jdbcnuodb-adapter'
-  spec.version          = '1.0.0'
+  spec.version          = ArJdbc::NuoDB::VERSION
   spec.authors          = ['Dave Meppelink', 'Robert Buck']
   spec.email            = 'rbuck@nuodb.com'
   spec.description      = 'ActiveRecord adapter for NuoDB. Only for use with JRuby. Requires separate Cache JDBC driver.'
