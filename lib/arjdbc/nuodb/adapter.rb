@@ -1,3 +1,5 @@
+require 'active_record/connection_adapters/abstract/schema_definitions'
+
 module ::ArJdbc
   module NuoDB
 
@@ -10,6 +12,58 @@ module ::ArJdbc
 
     def self.arel2_visitors(config)
       {}.tap { |v| %w(nuodb).each { |a| v[a] = ::Arel::Visitors::NuoDB } }
+    end
+
+    # FEATURES ===============================================
+
+    def supports_migrations?
+      true
+    end
+
+    def supports_primary_key?
+      true
+    end
+
+    def supports_count_distinct?
+      true
+    end
+
+    def supports_ddl_transactions?
+      true
+    end
+
+    def supports_bulk_alter?
+      false
+    end
+
+    def supports_savepoints?
+      true
+    end
+
+    def supports_index_sort_order?
+      true
+    end
+
+    def supports_partial_index?
+      false
+    end
+
+    def supports_explain?
+      false
+    end
+
+    # SAVEPOINT SUPPORT ======================================
+
+    def create_savepoint
+      execute("SAVEPOINT #{current_savepoint_name}")
+    end
+
+    def rollback_to_savepoint
+      execute("ROLLBACK TO SAVEPOINT #{current_savepoint_name}")
+    end
+
+    def release_savepoint
+      execute("RELEASE SAVEPOINT #{current_savepoint_name}")
     end
 
     def modify_types(tp)

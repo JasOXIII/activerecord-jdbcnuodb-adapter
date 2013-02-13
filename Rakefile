@@ -147,11 +147,11 @@ task :build do
 end
 
 task :install => :build do
-  sh %{gem install pkg/#{name}-#{version}}
+  sh %{jruby -S gem install pkg/#{name}-#{version}}
 end
 
 task :uninstall do
-  sh %{gem uninstall #{name} -x -v #{version}}
+  sh %{jruby -S gem uninstall #{name} -x -v #{version}}
 end
 
 desc 'Tags git with the latest gem version'
