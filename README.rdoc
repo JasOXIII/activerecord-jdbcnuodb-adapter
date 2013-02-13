@@ -17,6 +17,7 @@ An ActiveRecord JDBC Adapter for NuoDB.
         database: test
         username: cloud
         password: user
+        schema: test
 
 2. In the Gemfile, call the nuodb gem with:
 
