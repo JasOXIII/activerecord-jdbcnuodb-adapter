@@ -52,6 +52,48 @@ module ::ArJdbc
       false
     end
 
+    # QUOTING ################################################
+
+    def quote(value, column = nil)
+      case value
+        when TrueClass, FalseClass
+          value.to_s
+        else
+          super
+      end
+    end
+
+    def quote_column_name(name)
+      "`#{name.to_s.gsub('`', '``')}`"
+    end
+
+    def quote_table_name(name)
+      quote_column_name(name).gsub('.', '`.`')
+    end
+
+    def type_cast(value, column)
+      return super unless value == true || value == false
+      value ? true : false
+    end
+
+    def quoted_true
+      "'true'"
+    end
+
+    def quoted_false
+      "'false'"
+    end
+
+    def quoted_date(value)
+      if value.acts_like?(:time)
+        zone_conversion_method = :getutc
+        if value.respond_to?(zone_conversion_method)
+          value = value.send(zone_conversion_method)
+        end
+      end
+      value.to_s(:db)
+    end
+
     # SAVEPOINT SUPPORT ======================================
 
     def create_savepoint
@@ -90,15 +132,6 @@ module ::ArJdbc
         'smallint'
       else
         'bigint'
-      end
-    end
-
-    def quote(value, column = nil)
-      case value
-        when TrueClass, FalseClass
-          value.to_s
-        else
-          super
       end
     end
 
