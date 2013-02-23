@@ -8,6 +8,7 @@ $:.unshift(File.expand_path('../lib', __FILE__))
 $:.unshift(File.dirname(__FILE__))
 
 require 'java'
-require 'jdbc/nuodb'
+require 'active_record/connection_adapters/jdbcnuodb_adapter'
 require 'support/config'
 require 'support/connection'
+require 'active_record'

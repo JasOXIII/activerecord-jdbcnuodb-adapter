@@ -7,7 +7,7 @@ require 'activerecord-jdbcnuodb-adapter'
 Gem::Specification.new do |spec|
   spec.name             = 'activerecord-jdbcnuodb-adapter'
   spec.version          = ArJdbc::NuoDB::VERSION
-  spec.authors          = ['Dave Meppelink', 'Robert Buck']
+  spec.authors          = ['Robert Buck', 'Dave Meppelink']
   spec.email            = 'rbuck@nuodb.com'
   spec.description      = 'ActiveRecord adapter for NuoDB. Only for use with JRuby. Requires separate Cache JDBC driver.'
   spec.summary          = 'ActiveRecord adapter for NuoDB.'
@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
 
   spec.test_files       = spec.files.select { |path| path =~ /^test\/.*test.*\.rb/ }
 
-  spec.add_dependency 'jdbc-nuodb', '~> 1.0.0'
+  spec.add_dependency 'jdbc-nuodb', '~> 1.0.1'
   spec.add_dependency 'activerecord-jdbc-adapter', '>= 1.0.0'
 
   %w(rake).each { |gem| spec.add_development_dependency gem }
