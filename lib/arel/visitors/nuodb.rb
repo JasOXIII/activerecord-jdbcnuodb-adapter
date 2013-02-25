@@ -1,7 +1,7 @@
 module Arel
   module Visitors
     class NuoDB < Arel::Visitors::ToSql
-      def visit_Arel_Nodes_SelectStatement o
+      def visit_Arel_Nodes_SelectStatement(o)
         [
             (visit(o.with) if o.with),
             o.cores.map { |x| visit_Arel_Nodes_SelectCore x }.join,
@@ -12,7 +12,7 @@ module Arel
         ].compact.join ' '
       end
 
-      def visit_Arel_Nodes_Limit o
+      def visit_Arel_Nodes_Limit(o)
         "FETCH FIRST #{visit o.expr} ROWS ONLY"
       end
     end
