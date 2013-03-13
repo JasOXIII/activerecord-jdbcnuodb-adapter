@@ -16,10 +16,17 @@ module ::ArJdbc
 
     module ColumnExtensions
 
+      # Maps NuoDB types to logical rails types.
       def simplified_type(field_type)
         case field_type
           when /bit/i then
             :boolean
+          when /timestamp/i then
+            :timestamp
+          when /time/i then
+            :time
+          when /date/i then
+            :date
           else
             super
         end
@@ -49,7 +56,7 @@ module ::ArJdbc
         :binary => {:name => 'binary'},
         :boolean => {:name => 'boolean'},
         :date => {:name => 'date'},
-        :datetime => {:name => 'datetime'},
+        :datetime => {:name => 'timestamp'},
         :decimal => {:name => 'decimal'},
         :float => {:name => 'float', :limit => 8},
         :integer => {:name => 'integer'},
@@ -63,6 +70,7 @@ module ::ArJdbc
         :numeric => {:name => 'numeric(20)'},
     }
 
+    # Maps logical rails types to NuoDB types.
     def native_database_types
       NATIVE_DATABASE_TYPES
     end
@@ -98,13 +106,24 @@ module ::ArJdbc
     def modify_types(tp)
       tp[:primary_key] = 'int not null generated always primary key'
       tp[:boolean] = {:name => 'boolean'}
-      tp[:integer] = {:name => 'int', :limit => 4}
+      tp[:date] = {:name => 'date', :limit => nil}
+      tp[:datetime] = {:name => 'timestamp', :limit => nil}
       tp[:decimal] = {:name => 'decimal'}
+      tp[:integer] = {:name => 'int', :limit => 4}
       tp[:string] = {:name => 'string'}
-      tp[:timestamp] = {:name => 'datetime'}
-      tp[:datetime][:limit] = nil
+      tp[:time] = {:name => 'time', :limit => nil}
+      tp[:timestamp] = {:name => 'timestamp', :limit => nil}
       tp
     end
+
+    protected
+
+    def translate_exception(exception, message)
+      # future translations here...
+      super
+    end
+
+    public
 
     # QUOTING ================================================================
 
@@ -171,6 +190,28 @@ module ::ArJdbc
             else
               raise(ActiveRecordError, "No integer type has byte size #{limit}. Use a numeric with precision 0 instead.")
           end
+        when 'timestamp'
+          column_type_sql = 'timestamp'
+          unless precision.nil?
+            case precision
+              when 0..9
+                column_type_sql << "(#{precision})"
+              else
+                nil
+            end
+          end
+          column_type_sql
+        when 'time'
+          column_type_sql = 'time'
+          unless precision.nil?
+            case precision
+              when 0..9
+                column_type_sql << "(#{precision})"
+              else
+                nil
+            end
+          end
+          column_type_sql
         else
           super
       end
@@ -184,11 +225,44 @@ module ::ArJdbc
       raise NotImplementedError, "rename_table is not implemented"
     end
 
+    def recreate_database(name, options = {}) #:nodoc:
+      drop_database(name)
+      create_database(name, options)
+    end
+
+    def create_database(name, options = {}) #:nodoc:
+      puts "create_database"
+    end
+
+    def drop_database(name) #:nodoc:
+      puts "drop_database"
+    end
+
     # DATABASE STATEMENTS ====================================================
 
     def exec_insert(sql, name, binds)
       sql = substitute_binds(sql, binds)
       @connection.execute_insert(sql)
+    end
+
+    LOST_CONNECTION_ERROR_MESSAGES = [
+        "End of stream reached",
+        "Broken pipe"]
+
+    # Monkey patch the execute method as reconnect is broken in the underlying
+    # Rails infrastructure; see these bug numbers and references:
+    #
+    # - https://github.com/jruby/activerecord-jdbc-adapter/issues/232
+    # - https://github.com/jruby/activerecord-jdbc-adapter/issues/237
+    def execute(sql, name = nil, binds = [])
+      tries ||= 2
+      super
+    rescue ActiveRecord::StatementInvalid => exception
+      if LOST_CONNECTION_ERROR_MESSAGES.any? { |msg| exception.message =~ /#{msg}/ }
+        reconnect!
+        retry unless (tries -= 1).zero?
+      end
+      raise
     end
 
     # CONNECTION POOL ========================================================
