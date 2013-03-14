@@ -23,6 +23,8 @@ An ActiveRecord JDBC Adapter for NuoDB.
 
     jruby -S gem 'activerecord-jdbcnuodb-adapter'
 
+3. Optionally integrate rake db:test tasks.
+
 == ENVIRONMENT SETUP
 
 === MAC
@@ -103,6 +105,80 @@ If you make a mistake, take it back quickly:
 
     git tag -d v1.0.1
     git push origin :refs/tags/v1.0.1
+
+===SUPPORTING RAILS DB MIGRATE TASKS
+
+We are making the driver compliant with the rake task interfaces in the :db namespace.
+You can now use standard rake tasks for just about everything except for creating the
+actual databases.
+
+The only problem is that the rails tasks themselves are not open or extensible in a
+manner that a driver can extend. As such there are a few integration points necessary
+on the application side of the house; this section details them.
+
+Place the following content in your lib/override_task.rb file:
+
+    Rake::TaskManager.class_eval do
+      def alias_task(fq_name)
+        new_name = "#{fq_name}:original"
+        @tasks[new_name] = @tasks.delete(fq_name)
+      end
+    end
+
+    def alias_task(fq_name)
+      Rake.application.alias_task(fq_name)
+    end
+
+    def alias_task_chain(*args, &block)
+      name, params, deps = Rake.application.resolve_args(args.dup)
+      fq_name = Rake.application.instance_variable_get(:@scope).dup.push(name).join(':')
+      alias_task(fq_name)
+      Rake::Task.define_task(*args, &block)
+    end
+
+Then in your lib/tasks/databases.rake script add the following content:
+
+    require 'override_task'
+
+    namespace :db do
+
+      namespace :structure do
+
+        alias_task_chain :dump => :environment do
+          if ActiveRecord::Base.configurations[Rails.env]['adapter'] == 'nuodb'
+            puts 'Task db:structure:dump skipped for NuoDB.'
+          else
+            Rake::Task['db:structure:dump:original'].execute
+          end
+        end
+
+      end
+
+      namespace :test do
+
+        alias_task_chain :purge => [:environment, :load_config] do
+          if ActiveRecord::Base.configurations[Rails.env]['adapter'] == 'nuodb'
+            ActiveRecord::Base.establish_connection(:test)
+            ActiveRecord::Base.connection.execute("drop schema #{ActiveRecord::Base.configurations[Rails.env]['schema']} cascade;")
+          else
+            Rake::Task['db:test:purge:original'].execute
+          end
+        end
+
+        alias_task_chain :clone_structure => 'db:structure:dump' do
+          if ActiveRecord::Base.configurations[Rails.env]['adapter'] == 'nuodb'
+            puts 'Task db:structure:clone_structure skipped for NuoDB.'
+          else
+            Rake::Task['db:test:clone_structure:original'].execute
+          end
+        end
+
+      end
+
+    end
+
+With these changes to your Rails application you will be able to run
+db:test:prepare tasks or similar.
 
 ===PUBLISHING
 
