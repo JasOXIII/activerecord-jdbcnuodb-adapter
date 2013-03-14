@@ -2,6 +2,8 @@ language: ruby
 
 rvm:
   - jruby-head
+  - jruby-18mode
+  - jruby-19mode
 
 env:
   - NUODB_ROOT=/opt/nuodb
