@@ -18,6 +18,7 @@ before_script:
   - sudo dpkg -i /var/tmp/nuodb.deb
 
 script:
+  - jruby -S gem update --system
   - jruby -S bundle install
   - jruby -S gem list
   - NUODB_ROOT=/opt/nuodb jruby -S bundle exec rake build install
