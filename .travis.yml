@@ -19,7 +19,9 @@ before_script:
 
 script:
   - jruby -S bundle install
+  - jruby -S gem list
   - NUODB_ROOT=/opt/nuodb jruby -S bundle exec rake build install
+  - jruby -S gem list
 
 after_script:
   - sudo dpkg -r nuodb
