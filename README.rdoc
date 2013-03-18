@@ -198,7 +198,7 @@ If you make a mistake, take it back quickly:
 
 Here are the commands used to publish:
 
-    gem push pkg/activerecord-jdbcnuodb-adapter-1.0.3.gem
+    jruby -S gem push pkg/activerecord-jdbcnuodb-adapter-1.0.3.gem
 
 == INSPECTING THE GEM
 
