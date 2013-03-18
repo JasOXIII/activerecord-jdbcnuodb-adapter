@@ -147,7 +147,7 @@ task :build do
 end
 
 task :install => :build do
-  sh %{jruby -S gem install pkg/#{name}-#{version}}
+  sh %{jruby -S gem install pkg/#{name}-#{version}.gem}
 end
 
 task :uninstall do
