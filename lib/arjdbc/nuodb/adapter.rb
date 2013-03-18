@@ -251,11 +251,6 @@ module ::ArJdbc
 
     # DATABASE STATEMENTS ====================================================
 
-    #def exec_insert(sql, name, binds)
-    #  sql = substitute_binds(sql, binds)
-    #  @connection.execute_insert(sql)
-    #end
-
     LOST_CONNECTION_ERROR_MESSAGES = [
         "End of stream reached",
         "Broken pipe",
@@ -269,19 +264,19 @@ module ::ArJdbc
     # - https://github.com/jruby/activerecord-jdbc-adapter/issues/237
 
     def execute(sql, name = nil, binds = [])
-      #puts "called execute"
       tries ||= 2
       super(sql, name, binds)
     rescue ActiveRecord::StatementInvalid, ActiveRecord::JDBCError => exception
       if LOST_CONNECTION_ERROR_MESSAGES.any? { |msg| exception.message =~ /#{msg}/ }
-        reconnect!
-        retry unless (tries -= 1).zero?
+        if open_transactions == 0
+          reconnect!
+          retry unless (tries -= 1).zero?
+        end
       end
       raise
     end
 
     def begin_db_transaction
-      #puts "called begin"
       tries ||= 2
       super
     rescue ActiveRecord::StatementInvalid, ActiveRecord::JDBCError => exception
@@ -293,7 +288,6 @@ module ::ArJdbc
     end
 
     def commit_db_transaction
-      #puts "called commit"
       super
     rescue ActiveRecord::StatementInvalid, ActiveRecord::JDBCError => exception
       if LOST_CONNECTION_ERROR_MESSAGES.any? { |msg| exception.message =~ /#{msg}/ }
@@ -303,7 +297,6 @@ module ::ArJdbc
     end
 
     def rollback_db_transaction
-      #puts "called rollback"
       super
     rescue ActiveRecord::StatementInvalid, ActiveRecord::JDBCError => exception
       if LOST_CONNECTION_ERROR_MESSAGES.any? { |msg| exception.message =~ /#{msg}/ }
