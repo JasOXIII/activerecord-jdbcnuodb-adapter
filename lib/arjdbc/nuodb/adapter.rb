@@ -229,11 +229,11 @@ module ::ArJdbc
     end
 
     def rename_column(table_name, column_name, new_column_name)
-      raise NotImplementedError, "rename_column is not implemented"
+      raise NotImplementedError, 'rename_column is not implemented'
     end
 
     def rename_table(table_name, new_name)
-      raise NotImplementedError, "rename_table is not implemented"
+      raise NotImplementedError, 'rename_table is not implemented'
     end
 
     def recreate_database(name, options = {}) #:nodoc:
@@ -242,19 +242,19 @@ module ::ArJdbc
     end
 
     def create_database(name, options = {}) #:nodoc:
-      puts "create_database"
+      $stderr.puts 'create_database is not implemented'
     end
 
     def drop_database(name) #:nodoc:
-      puts "drop_database"
+      $stderr.puts 'drop_database is not implemented'
     end
 
     # DATABASE STATEMENTS ====================================================
 
     LOST_CONNECTION_ERROR_MESSAGES = [
-        "End of stream reached",
-        "Broken pipe",
-        "Connection reset"
+        'End of stream reached',
+        'Broken pipe',
+        'Connection reset'
     ]
 
     # Monkey patch the execute method as reconnect is broken in the underlying
