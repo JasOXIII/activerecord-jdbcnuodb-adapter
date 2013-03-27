@@ -7,6 +7,7 @@ rvm:
 
 env:
   - NUODB_ROOT=/opt/nuodb
+  - CLASSPATH=/opt/nuodb/jar/nuodbjdbc.jar
 
 notifications:
   recipients:
@@ -29,7 +30,7 @@ script:
   - jruby -S gem update --system
   - jruby -S bundle install
   - jruby -S gem list
-  - NUODB_ROOT=/opt/nuodb jruby -S bundle exec rake build install
+  - NUODB_ROOT=/opt/nuodb jruby -S bundle exec rake build spec install
   - jruby -S gem list
 
 after_script:
