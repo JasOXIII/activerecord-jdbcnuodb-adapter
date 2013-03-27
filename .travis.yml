@@ -6,8 +6,7 @@ rvm:
   - jruby-19mode
 
 env:
-  - NUODB_ROOT=/opt/nuodb
-  - CLASSPATH=/opt/nuodb/jar/nuodbjdbc.jar
+  - NUODB_ROOT=/opt/nuodb CLASSPATH=/opt/nuodb/jar/nuodbjdbc.jar
 
 notifications:
   recipients:
