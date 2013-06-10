@@ -4,6 +4,7 @@
 {<img src="https://gemnasium.com/nuodb/activerecord-jdbcnuodb-adapter.png?travis" alt="Dependency Status" />}[https://gemnasium.com/nuodb/activerecord-jdbcnuodb-adapter]
 {<img src="https://codeclimate.com/github/nuodb/activerecord-jdbcnuodb-adapter.png" />}[https://codeclimate.com/github/nuodb/activerecord-jdbcnuodb-adapter]
 
+
 == DESCRIPTION
 
 An ActiveRecord JDBC Adapter for NuoDB.
@@ -209,3 +210,4 @@ To do this you dump the contents of a gem thus:
 
 == REFERENCES
 
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/74e4ed41ce2e3147bdd475979e32e309 "githalytics.com")](http://githalytics.com/nuodb/activerecord-jdbcnuodb-adapter)
