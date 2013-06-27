@@ -16,7 +16,6 @@ Gem::Specification.new do |spec|
 
   spec.require_paths    = %w[lib]
   spec.rdoc_options     = %w(--charset=UTF-8)
-  spec.extra_rdoc_files = %w[README.rdoc LICENSE]
 
   spec.files            = `git ls-files`.split($\)
 
