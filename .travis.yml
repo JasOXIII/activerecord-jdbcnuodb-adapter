@@ -6,11 +6,11 @@ rvm:
   - jruby-19mode
 
 env:
-  - NUODB_ROOT=/opt/nuodb CLASSPATH=/opt/nuodb/jar/nuodbjdbc.jar NUODB_VERSION=1.2
-  - NUODB_ROOT=/opt/nuodb CLASSPATH=/opt/nuodb/jar/nuodbjdbc.jar NUODB_VERSION=1.1.1
-  - NUODB_ROOT=/opt/nuodb CLASSPATH=/opt/nuodb/jar/nuodbjdbc.jar NUODB_VERSION=1.1
-  - NUODB_ROOT=/opt/nuodb CLASSPATH=/opt/nuodb/jar/nuodbjdbc.jar NUODB_VERSION=1.0.2
-  - NUODB_ROOT=/opt/nuodb CLASSPATH=/opt/nuodb/jar/nuodbjdbc.jar NUODB_VERSION=1.0.1
+  - NUODB_HOME=/opt/nuodb CLASSPATH=/opt/nuodb/jar/nuodbjdbc.jar NUODB_VERSION=1.2
+  - NUODB_HOME=/opt/nuodb CLASSPATH=/opt/nuodb/jar/nuodbjdbc.jar NUODB_VERSION=1.1.1
+  - NUODB_HOME=/opt/nuodb CLASSPATH=/opt/nuodb/jar/nuodbjdbc.jar NUODB_VERSION=1.1
+  - NUODB_HOME=/opt/nuodb CLASSPATH=/opt/nuodb/jar/nuodbjdbc.jar NUODB_VERSION=1.0.2
+  - NUODB_HOME=/opt/nuodb CLASSPATH=/opt/nuodb/jar/nuodbjdbc.jar NUODB_VERSION=1.0.1
 
 notifications:
   recipients:
@@ -28,11 +28,10 @@ before_script:
   - java -jar ${NUODB_HOME}/jar/nuodbmanager.jar --broker localhost --user domain --password bird --command "start process te database test host localhost options '--dba-user dba --dba-password baz' waitForRunning true"
   - echo "create user cloud password 'user';" | ${NUODB_HOME}/bin/nuosql test@localhost --user dba --password baz
 
-
 script:
   - jruby -S gem update --system
   - jruby -S bundle install
-  - NUODB_ROOT=/opt/nuodb jruby -S rake clean build spec install
+  - NUODB_ROOT=NUODB_HOME jruby -S rake clean build spec install
 
 after_script:
   - sudo dpkg -r nuodb
