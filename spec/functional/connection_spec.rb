@@ -22,8 +22,8 @@ describe ActiveRecord::ConnectionAdapters::NuoDBAdapter do
         ActiveRecord::Base.establish_connection(
             :adapter => 'nuodb',
             :database => 'test',
-            :username => 'cloud',
-            :password => 'user'
+            :username => 'dba',
+            :password => 'baz'
         )
 
         ActiveRecord::Schema.define do
