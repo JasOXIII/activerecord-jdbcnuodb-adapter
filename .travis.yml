@@ -24,7 +24,7 @@ before_install:
   - sleep 2
   - jruby -S gem update --system
   - git clone https://github.com/nuodb/jruby-jdbc-nuodb.git ~/jruby-jdbc-nuodb
-  - cd ~/jruby-jdbc-nuodb && jruby -S bundle install
+  - cd ~/jruby-jdbc-nuodb && jruby -S bundle install && jruby -S rake install spec
 
 before_script:
   - java -jar ${NUODB_HOME}/jar/nuodbmanager.jar --broker localhost --user domain --password bird --command "start process sm database test host localhost archive /var/tmp/nuodb initialize true waitForRunning true"
