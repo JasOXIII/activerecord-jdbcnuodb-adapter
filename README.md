@@ -22,22 +22,22 @@ An ActiveRecord JDBC Adapter for NuoDB.
           adapter: nuodb
           database: development
           schema: test
-          username: cloud
-          password: user
+          username: dba
+          password: baz
 
         test:
           adapter: nuodb
           database: development
           schema: test
-          username: cloud
-          password: user
+          username: dba
+          password: baz
 
         production:
           adapter: nuodb
           database: development
           schema: test
-          username: cloud
-          password: user
+          username: dba
+          password: baz
 
 2.  In the Gemfile, call the nuodb gem with:
 
@@ -163,7 +163,7 @@ Start up a minimal chorus as follows:
 Create a user in the database:
 
     ${NUODB_ROOT}/bin/nuosql test@localhost --user dba --password baz
-    > create user cloud password 'user';
+    > create user dba password 'baz';
     > exit
 
 Run the tests:
@@ -176,8 +176,8 @@ Run the tests:
 1.  Install the NuoDB gems:
 
         jruby -S gem install rails
-        jruby -S gem install jdbc-nuodb-1.0.1.gem
-        jruby -S gem install activerecord-jdbcnuodb-adapter-1.0.3.gem
+        jruby -S gem install jdbc-nuodb-1.2.gem
+        jruby -S gem install activerecord-jdbcnuodb-adapter-1.2.gem
 
 2.  Verify the gems are installed:
 
@@ -196,26 +196,26 @@ Run the tests:
 Tag the product using tags per the SemVer specification; our tags have a
 v-prefix:
 
-    git tag -a v1.0.3 -m "SemVer Version: v1.0.3"
+    git tag -a v1.2 -m "SemVer Version: v1.2"
     git push --tags
 
 If you make a mistake, take it back quickly:
 
-    git tag -d v1.0.3
+    git tag -d v1.2
     git push origin :refs/tags/v1.0.3
 
 ### PUBLISHING
 
 Here are the commands used to publish:
 
-    jruby -S gem push pkg/activerecord-jdbcnuodb-adapter-1.0.3.gem
+    jruby -S gem push pkg/activerecord-jdbcnuodb-adapter-1.2.gem
 
 ## INSPECTING THE GEM
 
 It is often useful to inspect the contents of a Gem before distribution. To do
 this you dump the contents of a gem thus:
 
-    gem unpack pkg/activerecord-jdbcnuodb-adapter-1.0.3.gem
+    gem unpack pkg/activerecord-jdbcnuodb-adapter-1.2.gem
 
 ## REFERENCES
 

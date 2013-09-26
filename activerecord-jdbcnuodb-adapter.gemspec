@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
 
   spec.test_files       = spec.files.select { |path| path =~ /^test\/.*test.*\.rb/ }
 
-  spec.add_dependency 'jdbc-nuodb', '~> 1.0.1'
+  spec.add_dependency 'jdbc-nuodb', '~> 1.2'
   spec.add_dependency 'activerecord-jdbc-adapter', '>= 1.0.0'
 
   %w(rake).each { |gem| spec.add_development_dependency gem }
