@@ -16,7 +16,8 @@ An ActiveRecord JDBC Adapter for NuoDB.
 
 ## Usage
 
-1.  Include NuoDB information in the database.yml file as:
+1.  Include NuoDB information in the database.yml file; in addition to the
+    following you may also specify the :host and :port properties for each:
 
         development:
           adapter: nuodb
