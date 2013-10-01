@@ -2,7 +2,6 @@ language: ruby
 
 rvm:
   - jruby-head
-  - jruby-18mode
   - jruby-19mode
 
 env:
@@ -29,7 +28,6 @@ before_script:
   - echo "create user cloud password 'user';" | ${NUODB_HOME}/bin/nuosql test@localhost --user dba --password baz
 
 script:
-  - jruby -S gem update --system
   - jruby -S bundle install
   - NUODB_ROOT=${NUODB_HOME} jruby -S rake clean build spec install
 
