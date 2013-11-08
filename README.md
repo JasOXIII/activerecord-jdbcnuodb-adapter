@@ -73,7 +73,7 @@ Place the following content in your lib/override_task.rb file:
 
     def alias_task_chain(*args, &block)
       name, params, deps = Rake.application.resolve_args(args.dup)
-      fq_name = Rake.application.instance_variable_get(:@scope).dup.push(name).join(':')
+      fq_name = Rake.application.instance_variable_get(:@scope).to_a.reverse.push(name).join(':')
       alias_task(fq_name)
       Rake::Task.define_task(*args, &block)
     end
