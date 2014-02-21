@@ -1,14 +1,8 @@
 # ActiveRecord JDBC NuoDB Adapter 
 
-[<img
-src="https://api.travis-ci.org/nuodb/activerecord-jdbcnuodb-adapter.png?branch
-=master" alt="Build Status"
-/>](http://travis-ci.org/nuodb/activerecord-jdbcnuodb-adapter) [<img
-src="https://gemnasium.com/nuodb/activerecord-jdbcnuodb-adapter.png?travis"
-alt="Dependency Status"
-/>](https://gemnasium.com/nuodb/activerecord-jdbcnuodb-adapter) [<img
-src="https://codeclimate.com/github/nuodb/activerecord-jdbcnuodb-adapter.png"
-/>](https://codeclimate.com/github/nuodb/activerecord-jdbcnuodb-adapter)
+[<img src="https://travis-ci.org/nuodb/activerecord-jdbcnuodb-adapter.png?branch=master" alt="Build Status"/>](http://travis-ci.org/nuodb/activerecord-jdbcnuodb-adapter)
+[<img src="https://gemnasium.com/nuodb/activerecord-jdbcnuodb-adapter.png?travis" alt="Dependency Status" />](https://gemnasium.com/nuodb/activerecord-jdbcnuodb-adapter)
+[<img src="https://codeclimate.com/github/nuodb/activerecord-jdbcnuodb-adapter.png"/>](https://codeclimate.com/github/nuodb/activerecord-jdbcnuodb-adapter)
 
 ## DESCRIPTION
 
