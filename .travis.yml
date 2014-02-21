@@ -23,8 +23,8 @@ before_install:
   - sleep 2
 
 before_script:
-  - /opt/nuodb/nuodbmgr --broker localhost --user domain --password bird --command "start process sm database test host localhost archive /var/opt/nuodb/production-archives/test initialize true waitForRunning true"
-  - /opt/nuodb/nuodbmgr --broker localhost --user domain --password bird --command "start process te database test host localhost options '--dba-user dba --dba-password baz' waitForRunning true"
+  - /opt/nuodb/bin/nuodbmgr --broker localhost --user domain --password bird --command "start process sm database test host localhost archive /var/opt/nuodb/production-archives/test initialize true waitForRunning true"
+  - /opt/nuodb/bin/nuodbmgr --broker localhost --user domain --password bird --command "start process te database test host localhost options '--dba-user dba --dba-password baz' waitForRunning true"
   - echo "create user cloud password 'user';" | ${NUODB_HOME}/bin/nuosql test@localhost --user dba --password baz
 
 script:
