@@ -23,7 +23,7 @@ describe ActiveRecord::ConnectionAdapters::NuoDBAdapter do
             :adapter => 'nuodb',
             :database => 'test',
             :username => 'dba',
-            :password => 'baz'
+            :password => 'dba'
         )
 
         ActiveRecord::Schema.define do
