@@ -176,9 +176,9 @@ Run the tests:
 
 1.  Install the NuoDB gems:
 
-        jruby -S gem install rails
-        jruby -S gem install jdbc-nuodb-1.2.gem
-        jruby -S gem install activerecord-jdbcnuodb-adapter-1.2.gem
+        jruby -S gem install rails --version 3.2.8
+        jruby -S gem install jdbc-nuodb-2.0.3.gem
+        jruby -S gem install activerecord-jdbcnuodb-adapter-2.0.3.gem
 
 2.  Verify the gems are installed:
 
