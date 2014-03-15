@@ -18,21 +18,21 @@ An ActiveRecord JDBC Adapter for NuoDB.
           database: development
           schema: test
           username: dba
-          password: baz
+          password: dba
 
         test:
           adapter: nuodb
           database: development
           schema: test
           username: dba
-          password: baz
+          password: dba
 
         production:
           adapter: nuodb
           database: development
           schema: test
           username: dba
-          password: baz
+          password: dba
 
 2.  In the Gemfile, call the nuodb gem with:
 
@@ -152,13 +152,13 @@ Or from the source tree:
 Start up a minimal chorus as follows:
 
     java -jar ${NUODB_ROOT}/jar/nuoagent.jar --broker &
-    ${NUODB_ROOT}/bin/nuodb --chorus test --password bar --dba-user dba --dba-password baz --verbose debug --archive /var/tmp/nuodb --initialize --force &
-    ${NUODB_ROOT}/bin/nuodb --chorus test --password bar --dba-user dba --dba-password baz &
+    ${NUODB_ROOT}/bin/nuodb --chorus test --password bar --dba-user dba --dba-password dba --verbose debug --archive /var/tmp/nuodb --initialize --force &
+    ${NUODB_ROOT}/bin/nuodb --chorus test --password bar --dba-user dba --dba-password dba &
 
 Create a user in the database:
 
-    ${NUODB_ROOT}/bin/nuosql test@localhost --user dba --password baz
-    > create user dba password 'baz';
+    ${NUODB_ROOT}/bin/nuosql test@localhost --user dba --password dba
+    > create user cloud password 'user';
     > exit
 
 Run the tests:
@@ -170,9 +170,9 @@ Run the tests:
 
 1.  Install the NuoDB gems:
 
-        jruby -S gem install rails
-        jruby -S gem install jdbc-nuodb-1.2.gem
-        jruby -S gem install activerecord-jdbcnuodb-adapter-1.2.gem
+        jruby -S gem install rails --version 3.2.8
+        jruby -S gem install jdbc-nuodb-2.0.3.gem
+        jruby -S gem install activerecord-jdbcnuodb-adapter-2.0.3.gem
 
 2.  Verify the gems are installed:
 

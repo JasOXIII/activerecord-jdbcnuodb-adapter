@@ -117,7 +117,7 @@ namespace :nuodb do
   end
 
   task :create_user do
-    #puts %x( echo "create user arunit password 'arunit';" | nuosql arunit@localhost --user dba --password baz )
+    #puts %x( echo "create user arunit password 'arunit';" | nuosql arunit@localhost --user dba --password dba )
   end
 
   task :start_server do

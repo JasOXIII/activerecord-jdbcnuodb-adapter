@@ -6,16 +6,13 @@ rvm:
 
 env:
   - NUODB_HOME=/opt/nuodb NUODB_VERSION=2.0.3
-  - NUODB_HOME=/opt/nuodb NUODB_VERSION=2.0.2
-  - NUODB_HOME=/opt/nuodb NUODB_VERSION=2.0.1
-  - NUODB_HOME=/opt/nuodb NUODB_VERSION=2.0
-  - NUODB_HOME=/opt/nuodb NUODB_VERSION=1.2
 
 notifications:
   recipients:
     - buck.robert.j@gmail.com
     - rbuck@nuodb.com
     - jgetto@nuodb.com
+    - tgates@nuodb.com
 
 before_install:
   - wget http://download.nuohub.org/nuodb-${NUODB_VERSION}.linux.x64.deb --output-document=/var/tmp/nuodb.deb
@@ -23,9 +20,9 @@ before_install:
   - sleep 2
 
 before_script:
-  - /opt/nuodb/bin/nuodbmgr --broker localhost --user domain --password bird --command "start process sm database test host localhost archive /var/opt/nuodb/production-archives/test initialize true waitForRunning true"
-  - /opt/nuodb/bin/nuodbmgr --broker localhost --user domain --password bird --command "start process te database test host localhost options '--dba-user dba --dba-password baz' waitForRunning true"
-  - echo "create user cloud password 'user';" | ${NUODB_HOME}/bin/nuosql test@localhost --user dba --password baz
+  - java -jar ${NUODB_HOME}/jar/nuodbmanager.jar --broker localhost --user domain --password bird --command "start process sm database test host localhost archive /var/tmp/nuodb initialize true waitForRunning true"
+  - java -jar ${NUODB_HOME}/jar/nuodbmanager.jar --broker localhost --user domain --password bird --command "start process te database test host localhost options '--dba-user dba --dba-password dba' waitForRunning true"
+  - echo "create user cloud password 'user';" | ${NUODB_HOME}/bin/nuosql test@localhost --user dba --password dba
 
 script:
   - jruby -S bundle install
