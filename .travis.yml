@@ -6,6 +6,7 @@ rvm:
 
 env:
   - NUODB_HOME=/opt/nuodb NUODB_VERSION=2.0.3
+  - NUODB_HOME=/opt/nuodb NUODB_VERSION=2.0.4
 
 notifications:
   recipients:
