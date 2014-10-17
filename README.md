@@ -141,11 +141,11 @@ To compile and test run this command:
 
 ## INSTALLING THE GEM
 
-    jruby -S gem install activerecord-jdbcnuodb-adapter-1.0.3.gem
+    jruby -S gem install activerecord-jdbcnuodb-adapter
 
 Or from the source tree:
 
-    jruby -S gem install pkg/activerecord-jdbcnuodb-adapter-1.0.3.gem
+    jruby -S gem install pkg/activerecord-jdbcnuodb-adapter-2.0.3.gem
 
 ## TESTING THE GEM
 
@@ -171,8 +171,8 @@ Run the tests:
 1.  Install the NuoDB gems:
 
         jruby -S gem install rails --version 3.2.8
-        jruby -S gem install jdbc-nuodb-2.0.3.gem
-        jruby -S gem install activerecord-jdbcnuodb-adapter-2.0.3.gem
+        jruby -S gem install jdbc-nuodb
+        jruby -S gem install activerecord-jdbcnuodb-adapter
 
 2.  Verify the gems are installed:
 
