@@ -18,21 +18,21 @@ An ActiveRecord JDBC Adapter for NuoDB.
           database: development
           schema: test
           username: dba
-          password: dba
+          password: goalie
 
         test:
           adapter: nuodb
           database: development
           schema: test
           username: dba
-          password: dba
+          password: goalie
 
         production:
           adapter: nuodb
           database: development
           schema: test
           username: dba
-          password: dba
+          password: goalie
 
 2.  In the Gemfile, call the nuodb gem with:
 
@@ -157,7 +157,7 @@ Start up a minimal chorus as follows:
 
 Create a user in the database:
 
-    ${NUODB_ROOT}/bin/nuosql test@localhost --user dba --password dba
+    ${NUODB_ROOT}/bin/nuosql test@localhost --user dba --password goalie
     > create user cloud password 'user';
     > exit
 
