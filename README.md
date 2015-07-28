@@ -214,5 +214,5 @@ this you dump the contents of a gem thus:
 
 ## LICENSE
 
-[NuoDB License](https://github.com/nuodb//blob/master/LICENSE)
+[NuoDB License](https://github.com/nuodb/activerecord-jdbcnuodb-adapter/blob/master/LICENSE)
 
