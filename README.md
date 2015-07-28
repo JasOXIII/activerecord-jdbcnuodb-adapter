@@ -6,7 +6,7 @@
 
 ## DESCRIPTION
 
-An ActiveRecord JDBC Adapter for NuoDB.
+The ActiveRecord JDBC Adapter for NuoDB. This is a community driven driver with limited support and testing from NuoDB.
 
 ## Usage
 
@@ -212,7 +212,7 @@ this you dump the contents of a gem thus:
 
     gem unpack pkg/activerecord-jdbcnuodb-adapter-1.2.gem
 
-## REFERENCES
+## LICENSE
 
-[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/74e4ed41ce2e3147bdd475979e32e309 "githalytics.com")](http://githalytics.com/nuodb/activerecord-jdbcnuodb-adapter)
+[NuoDB License](https://github.com/nuodb//blob/master/LICENSE)
 
