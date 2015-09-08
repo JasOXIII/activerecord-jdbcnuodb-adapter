@@ -10,10 +10,7 @@ env:
 
 notifications:
   recipients:
-    - buck.robert.j@gmail.com
-    - rbuck@nuodb.com
-    - jgetto@nuodb.com
-    - tgates@nuodb.com
+    - drivers@nuodb.com
 
 before_install:
   - export NUODB_HOME=/opt/nuodb
